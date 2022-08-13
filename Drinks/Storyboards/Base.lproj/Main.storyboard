@@ -3,7 +3,6 @@
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -99,9 +98,6 @@
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27d-xl-Iwe">
-                                <rect key="frame" x="0.0" y="352" width="320" height="216"/>
-                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -110,35 +106,17 @@
                             <constraint firstItem="42N-TX-4Yp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7Mj-gM-KlZ"/>
                             <constraint firstItem="42N-TX-4Yp" firstAttribute="top" secondItem="iYg-oj-4CC" secondAttribute="bottom" multiplier="1.2" id="FhX-rH-cxB"/>
                             <constraint firstItem="iYg-oj-4CC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Fyv-Pn-wLN"/>
-                            <constraint firstItem="27d-xl-Iwe" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.380282" id="GGU-Za-Xl9"/>
-                            <constraint firstItem="27d-xl-Iwe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GR4-0x-VEd"/>
                             <constraint firstItem="42N-TX-4Yp" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.55" constant="7.5999999999999659" id="S0l-9j-tCm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="27d-xl-Iwe" secondAttribute="bottom" id="Uzs-HC-HKl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="42N-TX-4Yp" secondAttribute="bottom" multiplier="1.15" constant="-8.7249999999999091" id="gQT-KX-Db7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iYg-oj-4CC" secondAttribute="trailing" constant="40" id="i6f-rj-E5G"/>
-                            <constraint firstAttribute="trailing" secondItem="27d-xl-Iwe" secondAttribute="trailing" id="yK2-cF-m6K"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="The Coctail Base" id="p6o-qf-yQ1">
                         <barButtonItem key="backBarButtonItem" title="back" id="zaE-ri-hgO"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="vqq-6g-z9y">
-                            <imageReference key="image" image="gear" catalog="system" renderingMode="hierarchical">
-                                <hierarchicalColors>
-                                    <color systemColor="labelColor"/>
-                                    <color systemColor="secondaryLabelColor"/>
-                                    <color systemColor="tertiaryLabelColor"/>
-                                </hierarchicalColors>
-                            </imageReference>
-                            <connections>
-                                <action selector="settingsBarButtonTapped:" destination="BYZ-38-t0r" id="sYx-za-l3s"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="drinkCollectionView" destination="42N-TX-4Yp" id="j3p-68-TqY"/>
-                        <outlet property="drinksPickerView" destination="27d-xl-Iwe" id="V3U-J6-ksu"/>
                         <outlet property="drinksTypeLabel" destination="iYg-oj-4CC" id="CW3-HF-q9y"/>
-                        <outlet property="settingBarButton" destination="vqq-6g-z9y" id="ABB-zz-QPl"/>
                         <segue destination="9Nm-dY-PIo" kind="show" identifier="showCoctailDetails" id="9Nh-0u-dxp"/>
                     </connections>
                 </viewController>
@@ -284,14 +262,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -300,9 +271,6 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

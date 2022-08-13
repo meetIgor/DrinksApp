@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 enum Link: String {
-    case drinkURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
-    
     case negroniURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=negroni"
     case margaritaURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
     case cosmopolitanURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=cosmopolitan"
