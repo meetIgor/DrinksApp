@@ -8,13 +8,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-    //MARK: - Private Properties
-    private var drink = Drink(drinks: [])
     
+    //MARK: - IB Outlets
     @IBOutlet weak var drinksTypeLabel: UILabel!
     
     @IBOutlet weak var drinkCollectionView: UICollectionView!
     
+    //MARK: - Private Properties
+    private var drink = Drink(drinks: [])
+    
+    //MAR: - Life Cycles Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchDrinks()
@@ -22,6 +25,7 @@ class ViewController: UIViewController {
         drinkCollectionView.dataSource = self
     }
     
+    //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let coctailVC = segue.destination as? CoctailViewController else { return }
         guard let coctail = sender as? Coctail else { return }
@@ -42,6 +46,7 @@ class ViewController: UIViewController {
     }
 }
 
+//MARK: - Collection View Methods
 extension ViewController: UICollectionViewDelegate,
                           UICollectionViewDataSource,
                           UICollectionViewDelegateFlowLayout {

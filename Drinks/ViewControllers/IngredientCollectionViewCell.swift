@@ -8,11 +8,14 @@
 import UIKit
 
 class IngredientCollectionViewCell: UICollectionViewCell {
+    
+    //MARK: - IB Outlets
     @IBOutlet weak var ingredientImageView: UIImageView!
     
     @IBOutlet weak var ingredientTitleLabel: UILabel!
     @IBOutlet weak var ingredientMeasureLabel: UILabel!
     
+    //NARK: - Life Cycles Methods
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -24,7 +27,8 @@ class IngredientCollectionViewCell: UICollectionViewCell {
         self.clipsToBounds = false
     }
     
-    func configure(with ingredient: String, and measure: String?) {
+    //MARK: - Public Properties
+    func configure(with ingredient: String, and measure: String) {
         let link = Link.ingredientImageURL.rawValue + ingredient + ".png"
         let ingredientImgURL2 = link.addingPercentEncoding(
             withAllowedCharacters: NSCharacterSet.urlQueryAllowed
@@ -39,7 +43,7 @@ class IngredientCollectionViewCell: UICollectionViewCell {
         }
         
         ingredientTitleLabel.text = ingredient
-        ingredientMeasureLabel.text = measure ?? ""
+        ingredientMeasureLabel.text = measure
         
         NetworkManager.shared.fetchImage(from: ingredientImgURL2) { [unowned self] result in
             switch result {

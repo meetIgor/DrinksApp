@@ -9,21 +9,22 @@ import UIKit
 
 class DrinkCollectionViewCell: UICollectionViewCell {
     
+    //MARK - IB Outlets
     @IBOutlet weak var drinkImageView: UIImageView!
     @IBOutlet weak var drinkTitleLabel: UILabel!
     @IBOutlet weak var drinkCategoryLabel: UILabel!
     
+    //MARK: - Life Cycles Methods
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         self.layer.cornerRadius = 5
         self.layer.shadowRadius = 9
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize(width: 5, height: 8)
-        
         self.clipsToBounds = false
     }
     
+    //MARK: - IB Actions
     @IBAction func likeButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -35,7 +36,9 @@ class DrinkCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    //MARK: - Public Methods
     func configure(with drink: Coctail) {
+        
         if UIScreen.main.bounds.height < 667 {
             drinkTitleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
             drinkCategoryLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
@@ -43,6 +46,7 @@ class DrinkCollectionViewCell: UICollectionViewCell {
             drinkTitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
             drinkCategoryLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         }
+        
         drinkTitleLabel.text = drink.drink
         drinkCategoryLabel.text = drink.category
         

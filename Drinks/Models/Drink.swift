@@ -114,7 +114,7 @@ extension Coctail {
     
     var measures: [String] {
         var result: [String] = []
-
+        
         guard let measure = measure1 else { return result}
         result.append(measure)
         guard let measure = measure2 else { return result}
@@ -145,7 +145,7 @@ extension Coctail {
         result.append(measure)
         guard let measure = measure15 else { return result}
         result.append(measure)
-
+        
         return result
     }
     
@@ -185,12 +185,4 @@ extension Coctail {
         
         return result
     }
-}
-
-enum DrinkTypes: String, CaseIterable {
-    case negroni = "negroni"
-    case margarita = "margarita"
-    case cosmopolitan = "cosmopolitan"
-    case daiquiri = "daiquiri"
-    case gin = "gin"
 }

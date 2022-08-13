@@ -9,14 +9,17 @@ import UIKit
 
 class CoctailViewController: UIViewController {
     
-    var coctail: Coctail!
-    
+    //MARK: - IB Outlets
     @IBOutlet weak var ingredientsCollectionView: UICollectionView!
     @IBOutlet weak var coctailImageView: UIImageView!
     
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var glassLabel: UILabel!
     
+    //MARK: - Public Properties
+    var coctail: Coctail!
+    
+    //MARK: - Life Cycles Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         ingredientsCollectionView.delegate = self
@@ -36,11 +39,9 @@ class CoctailViewController: UIViewController {
         }
         coctailImageView.layer.cornerRadius = 10
     }
-    
-    
-    
 }
 
+//MARK: - Collection View Methods
 extension CoctailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -56,11 +57,12 @@ extension CoctailViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let ingredient = coctail.ingredients[indexPath.item]
         
+        //проверяем. размер measures может быть меньше ingredients
         if (coctail.measures.count - 1) < indexPath.item {
             cell.configure(with: ingredient, and: "")
         } else {
             cell.configure(with: ingredient, and: coctail.measures[indexPath.item])
-        }        
+        }
         
         return cell
     }
