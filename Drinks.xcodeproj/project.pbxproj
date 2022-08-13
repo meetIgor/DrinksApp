@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ADAC6E0128A7F64500CC2F11 /* CoctailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAC6E0028A7F64500CC2F11 /* CoctailViewController.swift */; };
+		ADAC6E0328A7FBF600CC2F11 /* IngredientCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAC6E0228A7FBF600CC2F11 /* IngredientCollectionViewCell.swift */; };
 		ADE5450428A6614100271452 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE5450328A6614100271452 /* AppDelegate.swift */; };
 		ADE5450628A6614100271452 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE5450528A6614100271452 /* SceneDelegate.swift */; };
 		ADE5450828A6614100271452 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE5450728A6614100271452 /* ViewController.swift */; };
@@ -15,9 +17,13 @@
 		ADE5451028A6614200271452 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADE5450E28A6614200271452 /* LaunchScreen.storyboard */; };
 		ADE5451F28A6646000271452 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE5451E28A6646000271452 /* Drink.swift */; };
 		ADE5452128A66D4A00271452 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE5452028A66D4A00271452 /* NetworkManager.swift */; };
+		ADE5452528A781A100271452 /* DrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE5452428A781A100271452 /* DrinkCollectionViewCell.swift */; };
+		ADE5452728A7ADEF00271452 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE5452628A7ADEF00271452 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ADAC6E0028A7F64500CC2F11 /* CoctailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoctailViewController.swift; sourceTree = "<group>"; };
+		ADAC6E0228A7FBF600CC2F11 /* IngredientCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCollectionViewCell.swift; sourceTree = "<group>"; };
 		ADE5450028A6614100271452 /* Drinks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE5450328A6614100271452 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADE5450528A6614100271452 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +34,8 @@
 		ADE5451128A6614200271452 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADE5451E28A6646000271452 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		ADE5452028A66D4A00271452 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		ADE5452428A781A100271452 /* DrinkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCollectionViewCell.swift; sourceTree = "<group>"; };
+		ADE5452628A7ADEF00271452 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				ADE5450C28A6614200271452 /* Assets.xcassets */,
+				ADE5452628A7ADEF00271452 /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -101,6 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				ADE5450728A6614100271452 /* ViewController.swift */,
+				ADE5452428A781A100271452 /* DrinkCollectionViewCell.swift */,
+				ADAC6E0028A7F64500CC2F11 /* CoctailViewController.swift */,
+				ADAC6E0228A7FBF600CC2F11 /* IngredientCollectionViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,7 +206,11 @@
 			files = (
 				ADE5450828A6614100271452 /* ViewController.swift in Sources */,
 				ADE5450428A6614100271452 /* AppDelegate.swift in Sources */,
+				ADE5452528A781A100271452 /* DrinkCollectionViewCell.swift in Sources */,
 				ADE5452128A66D4A00271452 /* NetworkManager.swift in Sources */,
+				ADAC6E0128A7F64500CC2F11 /* CoctailViewController.swift in Sources */,
+				ADE5452728A7ADEF00271452 /* Constants.swift in Sources */,
+				ADAC6E0328A7FBF600CC2F11 /* IngredientCollectionViewCell.swift in Sources */,
 				ADE5451F28A6646000271452 /* Drink.swift in Sources */,
 				ADE5450628A6614100271452 /* SceneDelegate.swift in Sources */,
 			);
