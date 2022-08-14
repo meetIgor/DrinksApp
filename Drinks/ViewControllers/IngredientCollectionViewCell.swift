@@ -8,11 +8,13 @@
 import UIKit
 
 class IngredientCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var ingredientImageView: UIImageView!
     
+    //MARK: - IB Outlets
+    @IBOutlet weak var ingredientImageView: UIImageView!
     @IBOutlet weak var ingredientTitleLabel: UILabel!
     @IBOutlet weak var ingredientMeasureLabel: UILabel!
     
+    //MARK: - Life Cycles Methods
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -24,6 +26,7 @@ class IngredientCollectionViewCell: UICollectionViewCell {
         self.clipsToBounds = false
     }
     
+    //MARK: - Public Methods
     func configure(with ingredient: String, and measure: String?) {
         let link = Link.ingredientImageURL.rawValue + ingredient + ".png"
         let ingredientImgURL2 = link.addingPercentEncoding(

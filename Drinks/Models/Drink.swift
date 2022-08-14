@@ -111,14 +111,10 @@ extension Coctail {
 
 //Arrays from ingredients and measures
 extension Coctail {
-//    var measures = [
-//        measure1, measure2, measure3, measure4, measure5, measure6, measure7,
-//        measure8, measure9, measure10, measure11, measure12, measure13, measure14, measure15
-//    ]
     
     var measures: [String] {
         var result: [String] = []
-
+        
         guard let measure = measure1 else { return result}
         result.append(measure)
         guard let measure = measure2 else { return result}
@@ -149,7 +145,7 @@ extension Coctail {
         result.append(measure)
         guard let measure = measure15 else { return result}
         result.append(measure)
-
+        
         return result
     }
     

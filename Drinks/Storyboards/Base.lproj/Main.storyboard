@@ -93,30 +93,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Types of Negroni" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iYg-oj-4CC">
-                                <rect key="frame" x="40" y="121.5" width="240" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Types of Negroni" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oem-XL-ULP">
+                                <rect key="frame" x="40" y="120" width="240" height="31.5"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27d-xl-Iwe">
-                                <rect key="frame" x="0.0" y="352" width="320" height="216"/>
-                            </pickerView>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="42N-TX-4Yp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6C7-H5-9HF"/>
                             <constraint firstItem="42N-TX-4Yp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7Mj-gM-KlZ"/>
-                            <constraint firstItem="42N-TX-4Yp" firstAttribute="top" secondItem="iYg-oj-4CC" secondAttribute="bottom" multiplier="1.2" id="FhX-rH-cxB"/>
-                            <constraint firstItem="iYg-oj-4CC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Fyv-Pn-wLN"/>
-                            <constraint firstItem="27d-xl-Iwe" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.380282" id="GGU-Za-Xl9"/>
-                            <constraint firstItem="27d-xl-Iwe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GR4-0x-VEd"/>
                             <constraint firstItem="42N-TX-4Yp" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.55" constant="7.5999999999999659" id="S0l-9j-tCm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="27d-xl-Iwe" secondAttribute="bottom" id="Uzs-HC-HKl"/>
+                            <constraint firstItem="Oem-XL-ULP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="fHV-4Q-agJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="42N-TX-4Yp" secondAttribute="bottom" multiplier="1.15" constant="-8.7249999999999091" id="gQT-KX-Db7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iYg-oj-4CC" secondAttribute="trailing" constant="40" id="i6f-rj-E5G"/>
-                            <constraint firstAttribute="trailing" secondItem="27d-xl-Iwe" secondAttribute="trailing" id="yK2-cF-m6K"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Oem-XL-ULP" secondAttribute="trailing" constant="40" id="lpu-gh-PxV"/>
+                            <constraint firstItem="42N-TX-4Yp" firstAttribute="top" secondItem="Oem-XL-ULP" secondAttribute="bottom" constant="30" id="oYX-Wr-GhQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="The Coctail Base" id="p6o-qf-yQ1">
@@ -136,9 +129,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="drinkCollectionView" destination="42N-TX-4Yp" id="j3p-68-TqY"/>
-                        <outlet property="drinksPickerView" destination="27d-xl-Iwe" id="V3U-J6-ksu"/>
-                        <outlet property="drinksTypeLabel" destination="iYg-oj-4CC" id="CW3-HF-q9y"/>
-                        <outlet property="settingBarButton" destination="vqq-6g-z9y" id="ABB-zz-QPl"/>
+                        <outlet property="drinkTypesTextField" destination="Oem-XL-ULP" id="U5Q-BW-kMo"/>
                         <segue destination="9Nm-dY-PIo" kind="show" identifier="showCoctailDetails" id="9Nh-0u-dxp"/>
                     </connections>
                 </viewController>

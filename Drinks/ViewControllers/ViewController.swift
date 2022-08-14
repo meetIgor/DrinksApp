@@ -8,80 +8,64 @@
 import UIKit
 
 class ViewController: UIViewController {
-    //MARK: - Private Properties
-    private var drink = Drink(drinks: [])
     
-    private var link = Link.drinkURL.rawValue + DrinkTypes.daiquiri.rawValue
-    
-    @IBOutlet weak var drinksTypeLabel: UILabel!
-    
+    //MARK: - IB Outlets
     @IBOutlet weak var drinkCollectionView: UICollectionView!
+    @IBOutlet weak var drinkTypesTextField: UITextField!
     
-    @IBOutlet weak var settingBarButton: UIBarButtonItem!
-    
-    //var drinksPicker: UIPickerView!
-    @IBOutlet weak var drinksPickerView: UIPickerView!
+    //MARK: - Public Properties
+    var drinksPickerView: UIPickerView!
     
     private var drinkTypes: [String] {
         DrinkTypes.allCases.map { $0.rawValue }
     }
     
+    //MARK: - Private Properties
+    private var drink = Drink(drinks: [])
+    private var link = Link.drinkURL.rawValue + DrinkTypes.daiquiri.rawValue
+    
+    //MARK: - Life Cycles Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        drinksPickerView.backgroundColor = .secondarySystemBackground
-        drinksPickerView.inputAccessoryViewController?.toolbarItems = createToolBar()
+        drinksPickerView = createPickerView()
+        drinkTypesTextField.inputView = drinksPickerView
+        drinkTypesTextField.tintColor = .clear
+        createToolBar()
+        
         setPicker()
         fetchDrinks()
+        
         drinkCollectionView.delegate = self
         drinkCollectionView.dataSource = self
-        drinksPickerView.delegate = self
-        
-        
-        //drinksPicker = createPickerView()
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
-        drinksPickerView.isHidden = true
+        drinkTypesTextField.isUserInteractionEnabled = false
     }
     
-    @IBAction func settingsBarButtonTapped(_ sender: Any) {
-        drinksPickerView.isHidden = false
-    }
-    
-    private func setPicker() {
-        drinksPickerView.selectRow(0, inComponent: 0, animated: true)
-        drinksTypeLabel.text = "Types of " + drinkTypes[drinksPickerView.selectedRow(inComponent: 0)]
-    }
-    
-    private func createToolBar() -> UIBarButtonItem {
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//        drinksPickerView.inputAccessoryView = toolbar
-
-        let doneButton = UIBarButtonItem(
-            title: "Done",
-            style: .plain,
-            target: self,
-            action: #selector(dismissKeyboard)
-        )
-//        let flexBar = UIBarButtonItem(
-//            barButtonSystemItem: .flexibleSpace,
-//            target: nil,
-//            action: nil
-//        )
-//        toolbar.items = [flexBar, doneButton]
-//        toolbar.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-//        return toolbar
-        return doneButton
-    }
-    
+    //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let coctailVC = segue.destination as? CoctailViewController else { return }
         guard let coctail = sender as? Coctail else { return }
         coctailVC.coctail = coctail
+    }
+    
+    //MARK: - IB ACtions
+    @IBAction func settingsBarButtonTapped(_ sender: Any) {
+        switch drinkTypesTextField.isUserInteractionEnabled {
+        case false:
+            drinkTypesTextField.isUserInteractionEnabled = true
+            drinkTypesTextField.becomeFirstResponder()
+        case true:
+            drinkTypesTextField.isUserInteractionEnabled = false
+        }
+    }
+    
+    private func setPicker() {
+        drinksPickerView.selectRow(3, inComponent: 0, animated: true)
+        drinkTypesTextField.text = "Types of " + drinkTypes[drinksPickerView.selectedRow(inComponent: 0)]
     }
     
     //MARK: - Private Methods
@@ -96,11 +80,49 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    private func createPickerView() -> UIPickerView {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.backgroundColor = .secondarySystemBackground
+        return picker
+    }
+    
+    private func createToolBar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        drinkTypesTextField.inputAccessoryView =  toolbar
+        
+        let doneButton = UIBarButtonItem(
+            title: "Done",
+            style: .plain,
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
+        let flexBar = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        toolbar.items = [flexBar, doneButton]
+        
+        toolbar.barTintColor = .secondarySystemBackground
+        toolbar.isTranslucent = false
+        toolbar.tintColor = .black
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+        drinkTypesTextField.isUserInteractionEnabled = false
+    }
+    
+    
 }
 
-extension ViewController: UICollectionViewDelegate,
-                          UICollectionViewDataSource,
-                          UICollectionViewDelegateFlowLayout {
+//MARK: - Collection View Methods
+extension ViewController:
+    UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         drink.drinks.count
     }
@@ -128,7 +150,9 @@ extension ViewController: UICollectionViewDelegate,
     }
 }
 
+//MARK: - Picker View Methods
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
@@ -143,7 +167,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         link = Link.drinkURL.rawValue + drinkTypes[row]
-        drinksTypeLabel.text = "Types of \(drinkTypes[row])"
+        drinkTypesTextField.text = "Types of \(drinkTypes[row])"
         fetchDrinks()
     }
 }
