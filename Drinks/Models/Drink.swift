@@ -111,6 +111,7 @@ extension Coctail {
 
 //Arrays from ingredients and measures
 extension Coctail {
+    
     var measures: [String] {
         var result: [String] = []
         
@@ -184,4 +185,12 @@ extension Coctail {
         
         return result
     }
+}
+
+enum DrinkTypes: String, CaseIterable {
+    case negroni = "negroni"
+    case margarita = "margarita"
+    case cosmopolitan = "cosmopolitan"
+    case daiquiri = "daiquiri"
+    case gin = "gin"
 }
