@@ -8,7 +8,7 @@
 import Foundation
 
 struct Drink: Decodable {
-    let drinks: [Coctail]
+    let drinks: [Сocktail]
     
     var description: String {
         var result = ""
@@ -17,9 +17,15 @@ struct Drink: Decodable {
         }
         return result
     }
+    
+    static func getDrinks(value: Any) -> Drink {
+        guard let drink = value as? [String: Any] else { return Drink(drinks: []) }
+        guard let cocktails = drink["drinks"] as? [[String: Any]] else { return Drink(drinks: []) }
+        return Drink(drinks: cocktails.compactMap { Сocktail(cocktailsData: $0) } )
+    }
 }
 
-struct Coctail: Decodable {
+struct Сocktail: Decodable {
     let drink: String
     let category: String
     let glass: String
@@ -56,6 +62,44 @@ struct Coctail: Decodable {
     let measure14: String?
     let measure15: String?
     
+    init(cocktailsData: [String: Any]) {
+        drink = cocktailsData["strDrink"] as? String ?? ""
+        category = cocktailsData["strCategory"] as? String ?? ""
+        glass = cocktailsData["strGlass"] as? String ?? ""
+        instructions = cocktailsData["strInstructions"] as? String ?? ""
+        drinkThumb = cocktailsData["strDrinkThumb"] as? String ?? ""
+        ingredient1 = cocktailsData["strIngredient1"] as? String
+        ingredient2 = cocktailsData["strIngredient2"] as? String
+        ingredient3 = cocktailsData["strIngredient3"] as? String
+        ingredient4 = cocktailsData["strIngredient4"] as? String
+        ingredient5 = cocktailsData["strIngredient5"] as? String
+        ingredient6 = cocktailsData["strIngredient6"] as? String
+        ingredient7 = cocktailsData["strIngredient7"] as? String
+        ingredient8 = cocktailsData["strIngredient8"] as? String
+        ingredient9 = cocktailsData["strIngredient9"] as? String
+        ingredient10 = cocktailsData["strIngredient10"] as? String
+        ingredient11 = cocktailsData["strIngredient11"] as? String
+        ingredient12 = cocktailsData["strIngredient12"] as? String
+        ingredient13 = cocktailsData["strIngredient13"] as? String
+        ingredient14 = cocktailsData["strIngredient14"] as? String
+        ingredient15 = cocktailsData["strIngredient15"] as? String
+        measure1 = cocktailsData["strMeasure1"] as? String
+        measure2 = cocktailsData["strMeasure2"] as? String
+        measure3 = cocktailsData["strMeasure3"] as? String
+        measure4 = cocktailsData["strMeasure4"] as? String
+        measure5 = cocktailsData["strMeasure5"] as? String
+        measure6 = cocktailsData["strMeasure6"] as? String
+        measure7 = cocktailsData["strMeasure7"] as? String
+        measure8 = cocktailsData["strMeasure8"] as? String
+        measure9 = cocktailsData["strMeasure9"] as? String
+        measure10 = cocktailsData["strMeasure10"] as? String
+        measure11 = cocktailsData["strMeasure11"] as? String
+        measure12 = cocktailsData["strMeasure12"] as? String
+        measure13 = cocktailsData["strMeasure13"] as? String
+        measure14 = cocktailsData["strMeasure14"] as? String
+        measure15 = cocktailsData["strMeasure15"] as? String
+    }
+    
     var description: String {
         """
         Title: \(drink)
@@ -68,122 +112,24 @@ struct Coctail: Decodable {
     }
 }
 
-//Coding Keys
-extension Coctail {
-    enum CodingKeys: String, CodingKey {
-        case drink = "strDrink"
-        case category = "strCategory"
-        case glass = "strGlass"
-        case instructions = "strInstructions"
-        case drinkThumb = "strDrinkThumb"
-        case ingredient1 = "strIngredient1"
-        case ingredient2 = "strIngredient2"
-        case ingredient3 = "strIngredient3"
-        case ingredient4 = "strIngredient4"
-        case ingredient5 = "strIngredient5"
-        case ingredient6 = "strIngredient6"
-        case ingredient7 = "strIngredient7"
-        case ingredient8 = "strIngredient8"
-        case ingredient9 = "strIngredient9"
-        case ingredient10 = "strIngredient10"
-        case ingredient11 = "strIngredient11"
-        case ingredient12 = "strIngredient12"
-        case ingredient13 = "strIngredient13"
-        case ingredient14 = "strIngredient14"
-        case ingredient15 = "strIngredient15"
-        case measure1 = "strMeasure1"
-        case measure2 = "strMeasure2"
-        case measure3 = "strMeasure3"
-        case measure4 = "strMeasure4"
-        case measure5 = "strMeasure5"
-        case measure6 = "strMeasure6"
-        case measure7 = "strMeasure7"
-        case measure8 = "strMeasure8"
-        case measure9 = "strMeasure9"
-        case measure10 = "strMeasure10"
-        case measure11 = "strMeasure11"
-        case measure12 = "strMeasure12"
-        case measure13 = "strMeasure13"
-        case measure14 = "strMeasure14"
-        case measure15 = "strMeasure15"
-    }
-}
-
 //Arrays from ingredients and measures
-extension Coctail {
+extension Сocktail {
+    var ingredients: [String] {
+        return [
+            ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6,
+            ingredient7, ingredient8, ingredient9, ingredient10, ingredient11, ingredient12,
+            ingredient13, ingredient14, ingredient15
+        ].compactMap { $0 }
+    }
     
     var measures: [String] {
-        var result: [String] = []
+        var allMeasures = [
+            measure1, measure2, measure3, measure4, measure5, measure6, measure7, measure8,
+            measure9, measure10, measure11, measure12, measure13, measure14, measure15
+        ].compactMap { $0 ?? ""}
+        allMeasures.removeLast(allMeasures.count - ingredients.count)
         
-        guard let measure = measure1 else { return result}
-        result.append(measure)
-        guard let measure = measure2 else { return result}
-        result.append(measure)
-        guard let measure = measure3 else { return result}
-        result.append(measure)
-        guard let measure = measure4 else { return result}
-        result.append(measure)
-        guard let measure = measure5 else { return result}
-        result.append(measure)
-        guard let measure = measure6 else { return result}
-        result.append(measure)
-        guard let measure = measure7 else { return result}
-        result.append(measure)
-        guard let measure = measure8 else { return result}
-        result.append(measure)
-        guard let measure = measure9 else { return result}
-        result.append(measure)
-        guard let measure = measure10 else { return result}
-        result.append(measure)
-        guard let measure = measure11 else { return result}
-        result.append(measure)
-        guard let measure = measure12 else { return result}
-        result.append(measure)
-        guard let measure = measure13 else { return result}
-        result.append(measure)
-        guard let measure = measure14 else { return result}
-        result.append(measure)
-        guard let measure = measure15 else { return result}
-        result.append(measure)
-        
-        return result
-    }
-    
-    var ingredients: [String] {
-        var result: [String] = []
-        
-        guard let ingredient = ingredient1 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient2 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient3 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient4 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient5 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient6 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient7 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient8 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient9 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient10 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient11 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient12 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient13 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient14 else { return result}
-        result.append(ingredient)
-        guard let ingredient = ingredient15 else { return result}
-        result.append(ingredient)
-        
-        return result
+        return allMeasures
     }
 }
 

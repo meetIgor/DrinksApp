@@ -17,7 +17,7 @@ class CoctailViewController: UIViewController {
     @IBOutlet weak var glassLabel: UILabel!
     
     //MARK: - Public Properties
-    var coctail: Coctail!
+    var cocktail: Сocktail!
     
     //MARK: - Life Cycles Methods
     override func viewDidLoad() {
@@ -25,16 +25,16 @@ class CoctailViewController: UIViewController {
         ingredientsCollectionView.delegate = self
         ingredientsCollectionView.dataSource = self
         
-        title = coctail.drink
-        instructionLabel.text = "Instruction: " + coctail.instructions
-        glassLabel.text = "Glass: " + coctail.glass
+        title = cocktail.drink
+        instructionLabel.text = "Instruction: " + cocktail.instructions
+        glassLabel.text = "Glass: " + cocktail.glass
         
-        NetworkManager.shared.fetchImage(from: coctail.drinkThumb) { [unowned self] result in
+        NetworkManager.shared.fetchData(from: cocktail.drinkThumb) { [ unowned self ] result in
             switch result {
             case .success(let imageData):
                 self.coctailImageView.image = UIImage(data: imageData)
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
         coctailImageView.layer.cornerRadius = 10
@@ -46,7 +46,7 @@ extension CoctailViewController:
     UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        coctail.ingredients.count
+        cocktail.ingredients.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -56,14 +56,10 @@ extension CoctailViewController:
                 for: indexPath
             ) as? IngredientCollectionViewCell else { return UICollectionViewCell() }
         
-        let ingredient = coctail.ingredients[indexPath.item]
-        
-        if (coctail.measures.count - 1) < indexPath.item {
-            cell.configure(with: ingredient, and: "")
-        } else {
-            cell.configure(with: ingredient, and: coctail.measures[indexPath.item])
-        }
-        
+        cell.configure(
+            with: cocktail.ingredients[indexPath.item],
+            and: cocktail.measures[indexPath.item]
+        )
         return cell
     }
     
