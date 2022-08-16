@@ -39,7 +39,7 @@ class DrinkCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Public Methods
-    func configure(with drink: Coctail) {
+    func configure(with drink: Сocktail) {
         if UIScreen.main.bounds.height < 667 {
             drinkTitleLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
             drinkCategoryLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
@@ -51,15 +51,14 @@ class DrinkCollectionViewCell: UICollectionViewCell {
         drinkTitleLabel.text = drink.drink
         drinkCategoryLabel.text = drink.category
         
-        NetworkManager.shared.fetchImage(from: drink.drinkThumb) { [unowned self] result in
+        NetworkManager.shared.fetchData(from: drink.drinkThumb) { [ unowned self ] result in
             switch result {
             case .success(let imageData):
                 self.drinkImageView.image = UIImage(data: imageData)
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
-        
         drinkImageView.layer.cornerRadius = 10
     }
 }

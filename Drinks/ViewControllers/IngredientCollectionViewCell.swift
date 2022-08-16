@@ -27,11 +27,9 @@ class IngredientCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Public Methods
-    func configure(with ingredient: String, and measure: String?) {
-        let link = Link.ingredientImageURL.rawValue + ingredient + ".png"
-        let ingredientImgURL2 = link.addingPercentEncoding(
-            withAllowedCharacters: NSCharacterSet.urlQueryAllowed
-        )
+    func configure(with ingredient: String, and measure: String) {
+        let link = (Link.ingredientImageURL.rawValue + ingredient + ".png")
+            .addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) ?? ""
         
         if UIScreen.main.bounds.height < 667 {
             ingredientTitleLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
@@ -42,17 +40,16 @@ class IngredientCollectionViewCell: UICollectionViewCell {
         }
         
         ingredientTitleLabel.text = ingredient
-        ingredientMeasureLabel.text = measure ?? ""
+        ingredientMeasureLabel.text = measure
         
-        NetworkManager.shared.fetchImage(from: ingredientImgURL2) { [unowned self] result in
+        NetworkManager.shared.fetchData(from: link) { [ unowned self ] result in
             switch result {
             case .success(let imageData):
                 self.ingredientImageView.image = UIImage(data: imageData)
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
-        
         ingredientImageView.layer.cornerRadius = 10
     }
 }

@@ -47,9 +47,9 @@ class ViewController: UIViewController {
     
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let coctailVC = segue.destination as? CoctailViewController else { return }
-        guard let coctail = sender as? Coctail else { return }
-        coctailVC.coctail = coctail
+        guard let cocktailVC = segue.destination as? CoctailViewController else { return }
+        guard let cocktail = sender as? Сocktail else { return }
+        cocktailVC.cocktail = cocktail
     }
     
     //MARK: - IB ACtions
@@ -70,13 +70,13 @@ class ViewController: UIViewController {
     
     //MARK: - Private Methods
     private func fetchDrinks() {
-        NetworkManager.shared.fetch(Drink.self, from: link) { [weak self] result in
+        NetworkManager.shared.fetchDrinks(from: link) { [unowned self] result in
             switch result {
             case .success(let drink):
-                self?.drink = drink
-                self?.drinkCollectionView.reloadData()
+                self.drink = drink
+                self.drinkCollectionView.reloadData()
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -115,8 +115,6 @@ class ViewController: UIViewController {
         view.endEditing(true)
         drinkTypesTextField.isUserInteractionEnabled = false
     }
-    
-    
 }
 
 //MARK: - Collection View Methods
