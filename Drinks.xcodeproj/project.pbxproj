@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD136B6228C7ABB100E5B7A0 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD136B6128C7ABB100E5B7A0 /* ImageCacheManager.swift */; };
 		ADAC6E0128A7F64500CC2F11 /* CoctailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAC6E0028A7F64500CC2F11 /* CoctailViewController.swift */; };
 		ADAC6E0328A7FBF600CC2F11 /* IngredientCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAC6E0228A7FBF600CC2F11 /* IngredientCollectionViewCell.swift */; };
 		ADC66A2E28AA8D300066DD77 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ADC66A2D28AA8D300066DD77 /* Alamofire */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD136B6128C7ABB100E5B7A0 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		ADAC6E0028A7F64500CC2F11 /* CoctailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoctailViewController.swift; sourceTree = "<group>"; };
 		ADAC6E0228A7FBF600CC2F11 /* IngredientCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCollectionViewCell.swift; sourceTree = "<group>"; };
 		ADE5450028A6614100271452 /* Drinks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				ADE5452028A66D4A00271452 /* NetworkManager.swift */,
+				AD136B6128C7ABB100E5B7A0 /* ImageCacheManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			files = (
 				ADE5450828A6614100271452 /* ViewController.swift in Sources */,
 				ADE5450428A6614100271452 /* AppDelegate.swift in Sources */,
+				AD136B6228C7ABB100E5B7A0 /* ImageCacheManager.swift in Sources */,
 				ADE5452528A781A100271452 /* DrinkCollectionViewCell.swift in Sources */,
 				ADE5452128A66D4A00271452 /* NetworkManager.swift in Sources */,
 				ADAC6E0128A7F64500CC2F11 /* CoctailViewController.swift in Sources */,
