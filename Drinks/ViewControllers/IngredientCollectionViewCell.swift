@@ -14,6 +14,14 @@ class IngredientCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ingredientTitleLabel: UILabel!
     @IBOutlet weak var ingredientMeasureLabel: UILabel!
     
+    private var activityIndicator: UIActivityIndicatorView?
+    private var imageURL: URL? {
+        didSet {
+            ingredientImageView.image = nil
+            updateImage()
+        }
+    }
+    
     //MARK: - Life Cycles Methods
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -24,6 +32,62 @@ class IngredientCollectionViewCell: UICollectionViewCell {
         layer.shadowOffset = CGSize(width: 5, height: 8)
         
         self.clipsToBounds = false
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        activityIndicator = showSpinner(in: ingredientImageView)
+    }
+    
+    // MARK: - Private Methods
+    private func updateImage() {
+        if let imageURL = imageURL {
+            getImage(from: imageURL) { [weak self] result in
+                switch result {
+                case .success(let image):
+                    if imageURL == self?.imageURL {
+                        self?.ingredientImageView.image = image
+                        self?.activityIndicator?.stopAnimating()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    private func getImage(from url: URL, completion: @escaping(Result<UIImage, Error>) -> Void) {
+        //get image from cache
+        if let cacheImage = ImageCacheManager.shared.object(forKey: url.lastPathComponent as NSString) {
+            print("Image form CACHE: ", url.lastPathComponent)
+            completion(.success(cacheImage))
+            return
+        }
+        
+        //download image from url
+        NetworkManager.shared.fetchData(from: url) { result in
+            switch result {
+            case .success(let imageData):
+                guard let image = UIImage(data: imageData) else { return }
+                completion(.success(image))
+                print("Image from URL: ", url.lastPathComponent)
+                ImageCacheManager.shared.setObject(image, forKey: url.lastPathComponent as NSString)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = .gray
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        //activityIndicator.center = view.center
+        activityIndicator.frame = CGRect(x: view.frame.height / 2, y: view.frame.width / 2, width: 10, height: 10)
+        view.addSubview(activityIndicator)
+        
+        return activityIndicator
     }
     
     //MARK: - Public Methods
@@ -42,14 +106,7 @@ class IngredientCollectionViewCell: UICollectionViewCell {
         ingredientTitleLabel.text = ingredient
         ingredientMeasureLabel.text = measure
         
-        NetworkManager.shared.fetchData(from: link) { [ unowned self ] result in
-            switch result {
-            case .success(let imageData):
-                self.ingredientImageView.image = UIImage(data: imageData)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        imageURL = URL(string: link)
         ingredientImageView.layer.cornerRadius = 10
     }
 }

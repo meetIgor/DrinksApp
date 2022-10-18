@@ -16,6 +16,17 @@ class CoctailViewController: UIViewController {
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var glassLabel: UILabel!
     
+    // MARK: - Private Properties
+    
+    private var activityIndicator: UIActivityIndicatorView?
+
+    private var imageURL: URL? {
+        didSet {
+            coctailImageView.image = nil
+            updateImage()
+        }
+    }
+    
     //MARK: - Public Properties
     var cocktail: Сocktail!
     
@@ -28,16 +39,62 @@ class CoctailViewController: UIViewController {
         title = cocktail.drink
         instructionLabel.text = "Instruction: " + cocktail.instructions
         glassLabel.text = "Glass: " + cocktail.glass
+        activityIndicator = showSpinner(in: coctailImageView)
+        imageURL = URL(string: cocktail.drinkThumb)
+        coctailImageView.layer.cornerRadius = 10
         
-        NetworkManager.shared.fetchData(from: cocktail.drinkThumb) { [ unowned self ] result in
-            switch result {
-            case .success(let imageData):
-                self.coctailImageView.image = UIImage(data: imageData)
-            case .failure(let error):
-                print(error.localizedDescription)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        activityIndicator?.frame = CGRect(x: coctailImageView.frame.width / 2, y: coctailImageView.frame.height / 2, width: 10, height: 10)
+    }
+    
+    private func showSpinner(in view: UIView) -> UIActivityIndicatorView {
+        let activityIndactor = UIActivityIndicatorView(style: .medium)
+        activityIndactor.color = .gray
+        activityIndactor.startAnimating()
+        activityIndactor.hidesWhenStopped = true
+        activityIndactor.center = view.center
+        //activityIndactor.frame = CGRect(x: view.frame.height / 2, y: view.frame.width / 2, width: 10, height: 10)
+        view.addSubview(activityIndactor)
+        return activityIndactor
+    }
+    
+    private func updateImage() {
+        if let imageURL = imageURL {
+            getImage(from: imageURL) { [weak self] result in
+                switch result {
+                case .success(let image):
+                    if imageURL == self?.imageURL {
+                        self?.coctailImageView.image = image
+                        self?.activityIndicator?.stopAnimating()
+                    }
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
-        coctailImageView.layer.cornerRadius = 10
+    }
+    
+    private func getImage(from url: URL, completion: @escaping(Result<UIImage, Error>) -> Void) {
+        //cache
+        if let cacheImage = ImageCacheManager.shared.object(forKey: url.lastPathComponent as NSString) {
+            completion(.success(cacheImage))
+            return
+        }
+        
+        //from URL
+        NetworkManager.shared.fetchData(from: url) { result in
+            switch result {
+            case .success(let imageData):
+                guard let image = UIImage(data: imageData) else { return }
+                completion(.success(image))
+                ImageCacheManager.shared.setObject(image, forKey: url.lastPathComponent as NSString)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
 
