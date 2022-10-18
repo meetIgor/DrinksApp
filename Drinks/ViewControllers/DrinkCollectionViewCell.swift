@@ -70,7 +70,6 @@ class DrinkCollectionViewCell: UICollectionViewCell {
     private func getImage(from url: URL, completion: @escaping(Result<UIImage, Error>) -> Void) {
         //get image from cache
         if let cacheImage = ImageCacheManager.shared.object(forKey: url.lastPathComponent as NSString) {
-            print("Image form CACHE: ", url.lastPathComponent)
             completion(.success(cacheImage))
             return
         }
@@ -81,7 +80,6 @@ class DrinkCollectionViewCell: UICollectionViewCell {
             case .success(let imageData):
                 guard let image = UIImage(data: imageData) else { return }
                 completion(.success(image))
-                print("Image from URL: ", url.lastPathComponent)
                 ImageCacheManager.shared.setObject(image, forKey: url.lastPathComponent as NSString)
             case .failure(let error):
                 print(error.localizedDescription)

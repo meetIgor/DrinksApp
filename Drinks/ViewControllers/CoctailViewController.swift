@@ -81,7 +81,6 @@ class CoctailViewController: UIViewController {
         //cache
         if let cacheImage = ImageCacheManager.shared.object(forKey: url.lastPathComponent as NSString) {
             completion(.success(cacheImage))
-            print("Image form CACHE: ", url.lastPathComponent)
             return
         }
         
@@ -91,7 +90,6 @@ class CoctailViewController: UIViewController {
             case .success(let imageData):
                 guard let image = UIImage(data: imageData) else { return }
                 completion(.success(image))
-                print("Image from URL: ", url.lastPathComponent)
                 ImageCacheManager.shared.setObject(image, forKey: url.lastPathComponent as NSString)
             case .failure(let error):
                 completion(.failure(error))
